@@ -14,7 +14,7 @@ A modern, responsive guitar e-commerce application built with Next.js, Apollo Cl
 - **Apollo Client Integration**: GraphQL data fetching from external API
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
 - **Search & Filter**: Real-time search and type filtering for guitar models
-- **Pagination**: Built-in pagination for models and musicians
+- **Infinite Scroll**: Dynamic loading of more models as user scrolls
 - **Loading States**: Graceful loading and error handling
 - **Modern UI**: Clean, professional design inspired by the provided Figma mockups
 
@@ -24,6 +24,7 @@ A modern, responsive guitar e-commerce application built with Next.js, Apollo Cl
 - **Language**: TypeScript
 - **GraphQL**: Apollo Client
 - **State Management**: React Context for language switching
+- **Styling**: Tailwind CSS with custom design system
 - **Deployment**: Ready for Vercel deployment
 
 ## 📦 Installation
@@ -51,22 +52,54 @@ A modern, responsive guitar e-commerce application built with Next.js, Apollo Cl
 
 ```
 src/
-├── app/                    # Next.js App Router pages
-│   ├── page.tsx           # Home page (Brands)
-│   ├── brands/[id]/       # Brand models page
-│   ├── guitars/[id]/      # Guitar details page
-│   └── layout.tsx         # Root layout with providers
-├── components/            # Reusable components
-│   ├── Header.tsx         # Navigation header
-│   └── Footer.tsx         # Footer with language switcher
-├── contexts/              # React contexts
-│   └── LanguageContext.tsx # Language management
-├── lib/                   # Utilities and configurations
-│   ├── apollo-client.ts   # Apollo Client setup
-│   ├── queries.ts         # GraphQL queries
-│   └── translations.ts    # Multilingual translations
-└── types/                 # TypeScript type definitions
-    └── index.ts           # Data interfaces
+├── app/                           # Next.js App Router pages
+│   ├── (pages)/                   # Route groups for better organization
+│   │   └── brands/                # Brand-related pages
+│   │       ├── page.tsx           # Home page (Brands listing)
+│   │       ├── [brandId]/         # Brand models page
+│   │       │   └── page.tsx
+│   │       └── [brandId]/[modelId]/ # Guitar details page
+│   │           └── page.tsx
+│   ├── layout.tsx                 # Root layout with providers
+│   ├── globals.css                # Global styles and design system
+│   └── favicon.ico
+├── components/                    # Reusable components
+│   ├── layout/                    # Layout components
+│   │   ├── Header.tsx            # Navigation header
+│   │   └── Footer.tsx            # Footer with language switcher
+│   ├── ui/                       # UI components
+│   │   ├── LoadingState.tsx      # Loading spinner
+│   │   ├── ErrorState.tsx        # Error display
+│   │   └── LanguageSwitcher.tsx  # Language selection
+│   ├── home/                     # Home page components
+│   │   ├── HeroSection.tsx       # Hero banner
+│   │   ├── BrandsSection.tsx     # Brands grid
+│   │   ├── FeaturesSection.tsx   # Features showcase
+│   │   └── MobileAppSection.tsx  # Mobile app promotion
+│   └── guitar/                   # Guitar-specific components
+│       ├── GuitarCard.tsx        # Individual guitar card
+│       ├── GuitarGrid.tsx        # Guitar grid layout
+│       ├── GuitarDetails.tsx     # Guitar details view
+│       └── MusicianCard.tsx      # Musician information
+├── lib/                          # Utilities and configurations
+│   ├── apollo/                   # Apollo Client setup
+│   │   └── client.ts
+│   ├── graphql/                  # GraphQL queries
+│   │   └── queries.ts
+│   └── i18n/                     # Internationalization
+│       └── translations.ts
+├── types/                        # TypeScript type definitions
+│   ├── guitar/                   # Guitar-related types
+│   │   └── index.ts
+│   ├── brand/                    # Brand-related types
+│   │   └── index.ts
+│   ├── common/                   # Common types
+│   │   └── index.ts
+│   └── index.ts                  # Main type exports
+├── contexts/                     # React contexts
+│   └── LanguageContext.tsx       # Language management
+└── providers/                    # React providers
+    └── ApolloProvider.tsx        # Apollo Client provider
 ```
 
 ## 🔧 Configuration
@@ -90,12 +123,15 @@ No environment variables are required for this project as it uses a public API.
 
 ### 2. Brand Models Page (`/brands/[id]`)
 - Shows guitar models for the selected brand
-- Search functionality to filter by name
-- Type filtering dropdown
-- Pagination with 6 items per page
+- **Custom Search & Filter Interface**:
+  - Left side: Filter dropdown with Electric, Acoustic, Bass options
+  - Right side: Search input with real-time filtering
+  - Vertical divider separating sections
+  - Clean, professional design with icons
+- Infinite scroll for dynamic loading
 - Back navigation to home
 
-### 3. Guitar Details Page (`/guitars/[id]`)
+### 3. Guitar Details Page (`/brands/[id]/[modelId]`)
 - Detailed guitar information
 - Two tabs: Specifications and Musicians
 - Musicians pagination (2 per page)
@@ -118,18 +154,32 @@ Language switching is available in the footer and affects all static text throug
 - **Icons**: SVG icons for better performance
 - **Animations**: Smooth transitions and hover effects
 - **Responsive**: Mobile-first design with breakpoints
+- **Custom UI Components**: Professional search/filter interface
 
 ## 🔍 Search & Filter
 
-### Search Functionality
-- Real-time search as you type
-- Case-insensitive matching
-- Searches through guitar model names
+### Custom Search & Filter Interface
+- **Filter Section**:
+  - Funnel icon for visual clarity
+  - Dropdown with Electric, Acoustic, Bass options
+  - Chevron indicator for dropdown
+  - "Filter by type" placeholder
+- **Search Section** :
+  - Magnifying glass icon
+  - Real-time search as you type
+  - "Search by name" placeholder
+  - Case-insensitive matching
+- **Design Elements**:
+  - Single container with rounded corners
+  - Vertical divider separating sections
+  - Consistent spacing and typography
+  - Professional, clean appearance
 
-### Filter Options
-- Filter by guitar type (Electric, Acoustic, Bass, etc.)
-- "All Types" option to show everything
-- Dynamic filter options based on available data
+### Infinite Scroll
+- Loads more models as user scrolls
+- Smooth loading indicators
+- Results counter showing progress
+- Replaces traditional pagination
 
 ## 📊 Data Flow
 
@@ -138,6 +188,13 @@ Language switching is available in the footer and affects all static text throug
 3. **Components** render data with proper loading/error states
 4. **Navigation** uses Next.js App Router for seamless routing
 
+## 🎯 Footer Layout
+
+### Professional Footer Design
+- **Left Side**: Company info, pages, product, and contact links
+- **Right Side**: Social media icons and language switcher
+- **Bottom**: Copyright information
+- **Responsive**: Stacks on mobile for better usability
 
 ## 📝 API Schema
 
@@ -147,7 +204,9 @@ The application expects the following GraphQL schema:
 type Brand {
   id: ID!
   name: String!
-  logo: String
+  origin: String!
+  image: String
+  categories: [String!]!
 }
 
 type GuitarModel {
@@ -156,13 +215,15 @@ type GuitarModel {
   type: String!
   price: Float!
   image: String
-  brand: Brand!
+  description: String!
+  specs: Specifications!
+  musicians: [Musician!]!
 }
 
 type Specifications {
   bodyWood: String!
   neckWood: String!
-  fingerboard: String!
+  fingerboardWood: String!
   pickups: String!
   tuners: String!
   scaleLength: String!
@@ -170,21 +231,9 @@ type Specifications {
 }
 
 type Musician {
-  id: ID!
   name: String!
-  image: String
-  genre: String!
-}
-
-type GuitarDetails {
-  id: ID!
-  name: String!
-  type: String!
-  price: Float!
-  image: String
-  specifications: Specifications!
-  musicians: [Musician!]!
-  brand: Brand!
+  musicianImage: String
+  bands: [String!]!
 }
 ```
 
@@ -210,4 +259,4 @@ If you encounter any issues:
 
 ---
 
-**Built with ❤️ using Next.js, Apollo Client**
+**Built with ❤️ using Next.js, Apollo Client, and TypeScript**

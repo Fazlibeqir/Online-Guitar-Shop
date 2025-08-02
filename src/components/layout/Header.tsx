@@ -1,6 +1,5 @@
 'use client';
 
-import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
 
 interface HeaderProps {
@@ -8,8 +7,7 @@ interface HeaderProps {
   onBackClick?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ showBackButton = false, onBackClick }) => {
-  const { t } = useLanguage();
+export const Header: React.FC<HeaderProps> = ({ showBackButton = false }) => {
 
   return (
     <header className="header">

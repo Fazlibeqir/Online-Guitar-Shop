@@ -207,6 +207,26 @@ export const translations: Translations = {
     mk: 'ОД',
     sq: 'NGA'
   },
+  'models.loadingMore': {
+    en: 'Loading more guitars...',
+    mk: 'Се вчитуваат повеќе гитари...',
+    sq: 'Duke ngarkuar më shumë kitarë...'
+  },
+  'models.showing': {
+    en: 'Showing',
+    mk: 'Прикажувам',
+    sq: 'Duke shfaqur'
+  },
+  'models.of': {
+    en: 'of',
+    mk: 'од',
+    sq: 'nga'
+  },
+  'models.results': {
+    en: 'results',
+    mk: 'резултати',
+    sq: 'rezultate'
+  },
 
   // Page 3 - Guitar Details
   'details.backToModels': {

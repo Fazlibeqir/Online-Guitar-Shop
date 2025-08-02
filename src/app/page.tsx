@@ -1,16 +1,16 @@
 'use client';
 
 import { useQuery } from '@apollo/client';
-import { GET_BRANDS } from '@/lib/queries';
+import { GET_BRANDS } from '@/lib/graphql/queries';
 import { Brand } from '@/types';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
-import { HeroSection } from '@/components/HeroSection';
-import { BrandsSection } from '@/components/BrandsSection';
-import { FeaturesSection } from '@/components/FeaturesSection';
-import { MobileAppSection } from '@/components/MobileAppSection';
-import { LoadingState } from '@/components/LoadingState';
-import { ErrorState } from '@/components/ErrorState';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { HeroSection } from '@/components/home/HeroSection';
+import { BrandsSection } from '@/components/home/BrandsSection';
+import { FeaturesSection } from '@/components/home/FeaturesSection';
+import { MobileAppSection } from '@/components/home/MobileAppSection';
+import { LoadingState } from '@/components/ui/LoadingState';
+import { ErrorState } from '@/components/ui/ErrorState';
 import { features } from '@/data/features';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -19,11 +19,23 @@ export default function GuitarBrandsPage() {
   const { loading, error, data } = useQuery(GET_BRANDS);
 
   if (loading) {
-    return <LoadingState />;
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <LoadingState />
+        <Footer />
+      </div>
+    );
   }
 
   if (error) {
-    return <ErrorState error={error} />;
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <ErrorState error={error} />
+        <Footer />
+      </div>
+    );
   }
 
   const brands: Brand[] = data?.findAllBrands || [];

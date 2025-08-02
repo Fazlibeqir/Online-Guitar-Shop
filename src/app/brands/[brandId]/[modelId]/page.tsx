@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@apollo/client';
-import { GET_GUITAR_DETAILS } from '@/lib/queries';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
+import { GET_GUITAR_DETAILS } from '@/lib/graphql/queries';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Link from 'next/link';
+import { Musician } from '@/types';
 
 export default function GuitarDetailsPage() {
   const { t } = useLanguage();
@@ -63,7 +64,7 @@ export default function GuitarDetailsPage() {
           <div className="error-container">
             <div className="error-icon">🔍</div>
             <h2 className="error-title">Guitar Not Found</h2>
-            <p className="error-message">The guitar you're looking for doesn't exist.</p>
+            <p className="error-message">The guitar you&apos;re looking for doesn&apos;t exist.</p>
           </div>
         </div>
         <Footer />
@@ -99,7 +100,7 @@ export default function GuitarDetailsPage() {
         <div className="guitar-details-content">
           {/* Back Link */}
           <div className="back-link-container">
-            <Link href={`/guitars/${brandId}`} className="back-link">
+            <Link href={`/brands/${brandId}`} className="back-link">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
@@ -175,8 +176,8 @@ export default function GuitarDetailsPage() {
                 
                 {guitar.specs && Object.keys(guitar.specs).length > 0 ? (
                   <div className="specifications-list">
-                    {Object.entries(guitar.specs).map(([key, value]) => (
-                      <div key={key} className="specification-item">
+                    {Object.entries(guitar.specs).map(([key, value], index) => (
+                      <div key={`${key}-${index}`} className="specification-item">
                         <span className="spec-label">{formatSpecKey(key)}:</span>
                         <span className="spec-value">{value as string}</span>
                       </div>
@@ -197,8 +198,8 @@ export default function GuitarDetailsPage() {
                 {currentMusicians.length > 0 ? (
                   <>
                     <div className="musicians-grid">
-                      {currentMusicians.map((musician: any) => (
-                        <div key={musician.name} className="musician-card">
+                      {currentMusicians.map((musician: Musician, index: number) => (
+                        <div key={`${musician.name}-${index}`} className="musician-card">
                           <div className="musician-image">
                             {musician.musicianImage ? (
                               <img 

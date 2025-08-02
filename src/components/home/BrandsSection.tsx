@@ -1,7 +1,7 @@
 'use client';
 
-import { Brand } from '@/types';
 import Link from 'next/link';
+import { Brand } from '@/types';
 
 interface BrandsSectionProps {
   brands: Brand[];
@@ -10,11 +10,11 @@ interface BrandsSectionProps {
   description: string;
 }
 
-export const BrandsSection: React.FC<BrandsSectionProps> = ({
-  brands,
-  title,
-  subtitle,
-  description
+export const BrandsSection: React.FC<BrandsSectionProps> = ({ 
+  brands, 
+  title, 
+  subtitle, 
+  description 
 }) => {
   return (
     <section className="brands-section">
@@ -30,7 +30,7 @@ export const BrandsSection: React.FC<BrandsSectionProps> = ({
           {brands.map((brand) => (
             <Link 
               key={brand.id} 
-              href={`/guitars/${brand.id}`}
+              href={`/brands/${brand.id}`}
               className="brand-card-link"
             >
               <div className="brand-card">
@@ -41,20 +41,17 @@ export const BrandsSection: React.FC<BrandsSectionProps> = ({
                       alt={brand.name}
                       className="brand-image"
                       onError={(e) => {
-                        // Fallback to text if image fails to load
+                        // Fallback to emoji if image fails to load
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
                         target.nextElementSibling?.classList.remove('fallback-hidden');
                       }}
                     />
                   ) : null}
-                  <span className={`brand-name ${brand.image ? 'fallback-hidden' : ''}`}>
-                    {brand.name}
-                  </span>
-                  {brand.origin && (
-                    <small className="brand-origin">{brand.origin}</small>
-                  )}
+                  <span className={`brand-emoji ${brand.image ? 'fallback-hidden' : ''}`}>🎸</span>
                 </div>
+                <h3 className="brand-name">{brand.name}</h3>
+                <p className="brand-origin">{brand.origin}</p>
               </div>
             </Link>
           ))}

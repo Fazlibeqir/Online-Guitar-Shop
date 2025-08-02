@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { Language } from '@/types';
-import { translations } from '@/lib/translations';
+import { translations } from '@/lib/i18n/translations';
 
 interface LanguageContextType {
   language: Language;
