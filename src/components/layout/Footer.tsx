@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 
@@ -46,10 +47,10 @@ export const Footer: React.FC = () => {
             <div className="footer-column">
               <h3 className="footer-links-title">{t('footer.pages')}</h3>
               <div className="footer-links">
-                <a href="/" className="footer-link">Home</a>
-                <a href="/guitars" className="footer-link">Guitars</a>
-                <a href="/brands" className="footer-link">Brands</a>
-                <a href="/about" className="footer-link">About</a>
+                <Link href="/" className="footer-link">Home</Link>
+                <Link href="/brands" className="footer-link">Brands</Link>
+                <Link href="/about" className="footer-link">About</Link>
+                <Link href="/contact" className="footer-link">Contact</Link>
               </div>
             </div>
 
@@ -57,10 +58,10 @@ export const Footer: React.FC = () => {
             <div className="footer-column">
               <h3 className="footer-links-title">{t('footer.product')}</h3>
               <div className="footer-links">
-                <a href="/electric" className="footer-link">Electric Guitars</a>
-                <a href="/acoustic" className="footer-link">Acoustic Guitars</a>
-                <a href="/bass" className="footer-link">Bass Guitars</a>
-                <a href="/accessories" className="footer-link">Accessories</a>
+                <Link href="/brands" className="footer-link">Electric Guitars</Link>
+                <Link href="/brands" className="footer-link">Acoustic Guitars</Link>
+                <Link href="/brands" className="footer-link">Bass Guitars</Link>
+                <Link href="/brands" className="footer-link">Accessories</Link>
               </div>
             </div>
 
@@ -68,10 +69,10 @@ export const Footer: React.FC = () => {
             <div className="footer-column">
               <h3 className="footer-links-title">{t('footer.contact')}</h3>
               <div className="footer-links">
-                <a href="/contact" className="footer-link">Contact Us</a>
-                <a href="/support" className="footer-link">Support</a>
-                <a href="/shipping" className="footer-link">Shipping Info</a>
-                <a href="/returns" className="footer-link">Returns</a>
+                <Link href="/contact" className="footer-link">Contact Us</Link>
+                <Link href="/support" className="footer-link">Support</Link>
+                <Link href="/shipping" className="footer-link">Shipping Info</Link>
+                <Link href="/returns" className="footer-link">Returns</Link>
               </div>
             </div>
           </div>
