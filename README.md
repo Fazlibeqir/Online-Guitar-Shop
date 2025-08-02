@@ -22,7 +22,6 @@ A modern, responsive guitar e-commerce application built with Next.js, Apollo Cl
 
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
 - **GraphQL**: Apollo Client
 - **State Management**: React Context for language switching
 - **Deployment**: Ready for Vercel deployment
