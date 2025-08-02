@@ -210,4 +210,4 @@ If you encounter any issues:
 
 ---
 
-**Built with ❤️ using Next.js, Apollo Client, and Tailwind CSS**
+**Built with ❤️ using Next.js, Apollo Client**
