@@ -138,26 +138,6 @@ Language switching is available in the footer and affects all static text throug
 3. **Components** render data with proper loading/error states
 4. **Navigation** uses Next.js App Router for seamless routing
 
-## 🚀 Deployment
-
-### Vercel (Recommended)
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy automatically on push
-
-### Manual Deployment
-```bash
-npm run build
-npm start
-```
-
-## 🧪 Testing
-
-The application includes:
-- TypeScript for type safety
-- ESLint for code quality
-- Responsive design testing
-- Error boundary handling
 
 ## 📝 API Schema
 
