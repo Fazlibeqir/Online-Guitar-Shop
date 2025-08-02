@@ -1,0 +1,10 @@
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+
+const httpLink = createHttpLink({
+  uri: 'https://graphql-api-brown.vercel.app/api/graphql',
+});
+
+export const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+}); 
